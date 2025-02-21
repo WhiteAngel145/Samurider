@@ -1,14 +1,14 @@
 
-
 export function setUserData(data) {
 	localStorage.setItem('userData', JSON.stringify(data));
 }
 
 export function getUserData() {
-	const data = localStorage.getItem('userData');
-	return data ? JSON.parse(data) : null;
+	let userData = localStorage.getItem('userData');
+	userData = JSON.parse(userData);
+	return userData;
 }
 
 export function removeUserData() {
-	localStorage.removeItem('userData');
+	localStorage.clear();
 }

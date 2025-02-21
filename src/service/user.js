@@ -1,5 +1,5 @@
 import { api } from '../api/requester.js';
-import { getUserData, setUserData, removeUserData } from '../utils/userUtils.js';
+import { setUserData, removeUserData } from '../utils/userUtils.js';
 
 const endpoints = {
 	register: '/users/register',
@@ -20,7 +20,6 @@ export async function login(data) {
 }
 
 export async function logout() {
-	const result = await api.get(endpoints.logout);
+	await api.get(endpoints.logout);
 	removeUserData();
-	return result;
 }

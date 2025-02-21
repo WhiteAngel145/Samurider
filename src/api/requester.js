@@ -29,12 +29,13 @@ async function requester(method, url, data) {
 				alert('Invalid session, resetting...');
 				removeUserData();
 			}
-			throw new Error(error.message);
+			throw error.message;
 		}
 
 		if (response.status === 204) {
-			return response.json();
+			return;
 		}
+		return response.json();
 	} catch (error) {
 		alert(error.message);
 		throw error;

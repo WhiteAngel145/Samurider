@@ -1,5 +1,7 @@
+import { logout } from "../service/user.js";
+import page from "../lib/page.js";
 
 export async function logoutView() {
-	console.log('Hello boss');
-	
+	await logout();
+	page.redirect('/');
 }
