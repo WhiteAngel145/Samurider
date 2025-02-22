@@ -1,8 +1,8 @@
-import { render, html } from "../lib/lit-html.js";
+import { render, html, nothing } from "../lib/lit-html.js";
 import { getMotorcycleById } from "../service/data.js";
+import { getUserData } from "../utils/userUtils.js";
 
 const template = (data) => html`
-    <!-- Details page -->
   <section id="details">
     <div id="details-wrapper">
         <img id="details-img" src=${data.imageUrl} alt=${data.model} />
@@ -16,8 +16,12 @@ const template = (data) => html`
           </div>
            <!--Edit and Delete are only for creator-->
           <div id="action-buttons">
-            <a href="/edit/${data._id}" id="edit-btn">Edit</a>
-            <a href="/delete/${data._id}" id="delete-btn">Delete</a>
+            ${data.isOwner
+              ? html`            
+              <a href="/edit/${data._id}" id="edit-btn">Edit</a>
+              <a href="/delete/${data._id}" id="delete-btn">Delete</a>`
+              : nothing
+            }
           </div>
         </div>
     </div>
@@ -27,5 +31,7 @@ const template = (data) => html`
 export async function detailsView(ctx) {
   const id = ctx.params.id;
   const data = await getMotorcycleById(id);
+  const userData = getUserData();
+  data.isOwner = userData && userData._id === data._ownerId;
 	render(template(data));
 }
