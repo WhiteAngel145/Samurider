@@ -3,30 +3,29 @@ import { searchMotorcycles } from "../service/data.js";
 import page from "../lib/page.js";
 
 const template = (onSearch, data) => html`
-    <!-- Search page -->
     <section id="search">
     <div class="form">
       <h4>Search</h4>
-      <form class="search-form">
+      <form @submit=${onSearch} class="search-form">
         <input type="text" name="search" id="search-input" />
-        <button @submit=${onSearch} class="button-list">Search</button>
+        <button class="button-list">Search</button>
       </form>
     </div>
     <h4 id="result-heading">Results:</h4>
       <div class="search-result">
         ${data.length === 0
           ? html`<h2 class="no-avaliable">No result.</h2>`
-          :data.map(
-            html`
-              <div class="motorcycle">
-                <img src="./images/Honda Hornet.png" alt="example1" />
-                <h3 class="model">Honda Hornet</h3>
-                <a class="details-btn" href="">More Info</a>
-              </div>
-            `)}
+          :data.map(item => card(item))}
       </div>
     </section>
 `
+const card = (data) => html`
+                <div class="motorcycle">
+                <img src=${data.imageUrl} alt="example1" />
+                <h3 class="model">${data.model}</h3>
+                <a class="details-btn" href="/details/${data._id}">More Info</a>
+              </div>
+`;
 
 export async function searchView(ctx) {
   
