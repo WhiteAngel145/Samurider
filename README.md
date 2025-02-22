@@ -12,7 +12,7 @@ This is a SPA (Single Page Application) for creating and managing motorcycles. T
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/WhiteAngel145/Eventer.git
+    git clone https://github.com/WhiteAngel145/Samurider
     ```
 2. Install dependencies:
     ```bash
@@ -91,25 +91,17 @@ ISC
 
 ## Application Requirements
 
-### Navigation Bar (5 pts)
+### Navigation Bar
 Implement a NavBar for the app: 
 - Navigation links should correctly change the current page (view). 
 - All users can see the site logo that should be a link to the Home page as well as the Dashboard which should link to the Motorcycles page. 
 - Guests (un-authenticated visitors) can see the links to the Login and Register and Search pages. 
 - The logged-in user navbar should contain the links to the Add Motorcycle, Search pages and a link for the Logout action.
 
-### Home Page (10 pts)
+### Home Page
 Implement a static Home page for the app using the structure for it from the given resources.  
 
-### Logged-in Page (5 pts)
+### Logged-in
 The included REST service comes with the following remade user accounts, which you may use for development:
 - { "email": "peter@abv.bg", "password": "123456" }
 - { "email": "john@abv.bg", "password": "123456" }
-
-The Login page contains a form for existing user authentication. By providing an email and password the app should log a user in the system if there are no empty fields.
-
-Send the following request to perform login:
-- Method: POST
-- URL: /users/login
-
-The required headers are described in the documentation. The service expects a body with the following shape
