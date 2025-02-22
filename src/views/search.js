@@ -2,7 +2,7 @@ import { render, html } from "../lib/lit-html.js";
 import { searchMotorcycles } from "../service/data.js";
 import page from "../lib/page.js";
 
-const template = (data, onSearch) => html`
+const template = (onSearch, data) => html`
     <!-- Search page -->
     <section id="search">
     <div class="form">
@@ -29,20 +29,19 @@ const template = (data, onSearch) => html`
 `
 
 export async function searchView(ctx) {
-  let data = [];
   
-  render(template(data, searchEventHandler));
-}
+  render(template(searchEventHandler, []));
 
-async function searchEventHandler(event) {
-  event.preventDefault();
-  const formData = new FormData(event.target);
-  const model = formData.get('search');
-
-  if (model === '') {
-    return alert('Search field is empty!');
+  async function searchEventHandler(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const model = formData.get('search');
+  
+    if (model === '') {
+      return alert('Search field is empty!');
+    }
+  
+    let data = await searchMotorcycles(model);
+    render(template(searchEventHandler, data));
   }
-
-  let data = await searchMotorcycles(model);
-  render(template(data, searchEventHandler));
 }
